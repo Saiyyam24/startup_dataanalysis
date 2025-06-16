@@ -54,7 +54,7 @@ def load_investor_detail(investor):
     vertical = investments['vertical'].unique()
     similar_investors = df[df['vertical'].isin(vertical) & (-df['investors'].str.contains(investor))].groupby('investors')['vertical'].nunique().reset_index(name='overlap_count')
     similar_investors = similar_investors[similar_investors['overlap_count'] >2]
-    val = similar_investors.sort_values(by='overlap_count',ascending=False)['investors']
+    val = similar_investors.sort_values(by='overlap_count',ascending=False)['investors'].reset_index(drop=True)
     st.dataframe(val)
 
 def load_startup_details(startup):
